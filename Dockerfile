@@ -14,7 +14,8 @@ ENV LANG "en_US.utf-8"
 
 #### Add pegasus user ####
 RUN useradd -s /bin/bash -m pegasus && \
-    chown -R pegasus:pegasus /home/pegasus
+    mkdir /home/pegasus/.hpc-annex && \
+    chown -R pegasus:pegasus /home/pegasus 
 
 
 #### Copy Annex Config ####
