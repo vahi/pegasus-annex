@@ -1,0 +1,1 @@
+htcondor -v annex  create --nodes 1 --lifetime 1800 --project xxxx --login-name nersc-username pegasus debug@perlmutter

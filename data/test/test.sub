@@ -1,0 +1,6 @@
+universe=vanilla
+executable=/bin/hostname
+output=test.out
+error=test.err
+log=test.log
+queue
