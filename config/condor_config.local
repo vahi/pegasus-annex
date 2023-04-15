@@ -1,4 +1,7 @@
 @CONDOR_HOST@
 @FULL_HOSTNAME@
+# network interface should map to the ip address inside the container
 @NETWORK_INTERFACE@
+# the tcp forwarding host should be the host ip address so that the annex
+# pilots can call back to the HTCondor Collector
 @TCP_FORWARDING_HOST@

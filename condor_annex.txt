@@ -1,1 +1,8 @@
 htcondor -v annex  create --nodes 1 --lifetime 1800 --project xxxx --login-name nersc-username pegasus debug@perlmutter
+
+# the address returned should be the ip of the host
+$ condor_status -collector -l | grep MyAddress
+[root@pegasus-annex /]# condor_status -collector -l | grep MyAddress
+MyAddress = "<192.168.180.174:9618?addrs=192.168.180.174-9618&alias=pegasus-annex&noUDP&sock=collector>"
+
+condor_status -any -af Machine MyAddress

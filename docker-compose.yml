@@ -8,3 +8,8 @@ services:
       restart: always
       volumes:
          - ./data/test:/home/pegasus/test:rw
+      # the collector running inside the container listens on port 9618
+      ports:
+         - "9618:9618"
+      environment:
+         - HOST_IP
