@@ -17,10 +17,13 @@ RUN useradd -s /bin/bash -m pegasus && \
     mkdir /home/pegasus/.hpc-annex && \
     chown -R pegasus:pegasus /home/pegasus 
 
+### Copy worklfow examples ###
+COPY --chown=pegasus:pegasus examples /home/pegasus/examples
 
 #### Copy Annex Config ####
 COPY config/11-annex.conf /etc/condor/config.d/11-annex.conf
 COPY config/condor_config.local /etc/condor/condor_config.local
+
 
 #### Create the entrypoint ####
 RUN echo "#!/bin/bash" > /opt/entrypoint.sh && \
