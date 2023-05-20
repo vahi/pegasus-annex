@@ -13,3 +13,4 @@ services:
          - "9618:9618"
       environment:
          - HOST_IP
+         - COLLECTOR_PORT

@@ -33,11 +33,11 @@ RUN echo "#!/bin/bash" > /opt/entrypoint.sh && \
     echo "IP_ADDR=\$(ifconfig | grep inet | grep -v 127.0.0.1 | awk '{ print \$2 }')"  >> /opt/entrypoint.sh && \
     echo "sed -i \"s/@NETWORK_INTERFACE@/NETWORK_INTERFACE = \$IP_ADDR/\" /etc/condor/condor_config.local" >> /opt/entrypoint.sh && \
     echo "sed -i \"s/@TCP_FORWARDING_HOST@/TCP_FORWARDING_HOST = \$HOST_IP/\" /etc/condor/condor_config.local" >> /opt/entrypoint.sh && \
+    echo 'PORT="${COLLECTOR_PORT:-9618}"' >> /opt/entrypoint.sh && \
+    echo "sed -i \"s/@COLLECTOR_PORT@/COLLECTOR_PORT = \$PORT/\" /etc/condor/condor_config.local" >> /opt/entrypoint.sh && \
     echo "/usr/sbin/condor_master" >> /opt/entrypoint.sh && \
     echo "/bin/sleep 10" >> /opt/entrypoint.sh && \
     echo "cp /etc/condor/passwords.d/POOL /etc/condor/passwords.d/hpcannex-key" >> /opt/entrypoint.sh && \
-    echo "PORT=\"${COLLECTOR_PORT:-9618}\"" >> /opt/entrypoint.sh && \
-    echo "sed -i \"s/@COLLECTOR_PORT@/COLLECTOR_PORT = \$PORT/\" /etc/condor/config.d/11-annex.conf" >> /opt/entrypoint.sh && \
     echo "while true; do sleep 60; done" >> /opt/entrypoint.sh && \
     chmod 755 /opt/entrypoint.sh 
 

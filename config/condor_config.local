@@ -2,6 +2,14 @@
 @FULL_HOSTNAME@
 # network interface should map to the ip address inside the container
 @NETWORK_INTERFACE@
+
+# port on which to run the collector
+@COLLECTOR_PORT@
+
 # the tcp forwarding host should be the host ip address so that the annex
 # pilots can call back to the HTCondor Collector
 @TCP_FORWARDING_HOST@
+
+# as a failsafe specify the ANNEX_COLLECTOR port to ensure
+# pilots report back to the right IP address
+ANNEX_COLLECTOR= $(TCP_FORWARDING_HOST):$(COLLECTOR_PORT)
