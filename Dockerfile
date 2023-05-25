@@ -2,7 +2,7 @@ FROM htcondor/mini:10.3.1-el8
 
 #### Update Packages ####
 RUN yum -y update && \
-    yum -y install emacs-nox
+    yum -y install emacs-nox telnet
 
 #### Install Pegasus ####
 RUN curl -o /etc/yum.repos.d/pegasus.repo http://download.pegasus.isi.edu/wms/download/rhel/8/pegasus.repo \
