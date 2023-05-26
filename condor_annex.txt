@@ -6,3 +6,9 @@ $ condor_status -collector -l | grep MyAddress
 MyAddress = "<192.168.180.174:9618?addrs=192.168.180.174-9618&alias=pegasus-annex&noUDP&sock=collector>"
 
 condor_status -any -af Machine MyAddress
+
+
+# loadbalance on nersc for demo
+# A dynamic DNS name is associated with the workload; it becomes accessible at the port you specify
+<workload>-loadbalancer.<namespace>.<cluster>.svc.spin.nersc.org
+annex-demo-loadbalancer.pegasus-workflows.development.svc.spin.nersc.org
