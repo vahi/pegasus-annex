@@ -44,7 +44,70 @@ Using default tag: latest
 The push refers to repository [registry.nersc.gov/m4144/pegasus-annex]
 ...
 ```
-
 Now if you goto your web browser and login to https://registry.nersc.gov/ you will be able to see the container in the repositories tab under your project name
 
 ![NERSC Repositories Listing by Project](./images/nersc-harbor-repos.png)
+
+## Deploy the container into Rancher
+
+In your webbrowser go to https://rancher2.spin.nersc.gov/dashboard/auth/login and login with your NERSC username and password.
+
+Login to the development cluster. Recommended for testing. You can also choose to deploy it in the production cluster.
+The Spin user guide has useful screenshots to help navigate the Rancher UI
+
+### Create a namespace
+
+In the top left menu, click on Cluster and under it click on Projects/Namespaces. 
+Then click on the button, Create Namespace on the right.
+In the form that comes up, give pegasus-workflows as the name to the namespace.
+
+![Create Pegasus Workflows namespace](./images/rancher-create-namespace.png)
+
+Once the namespace is created, you will see pegasus-workflows in your created namespaces. Click on it.
+
+### Create a deployment
+Then in the top left menu, click on Workload and under it click on Deployments.
+Then click on the blue button, Create on the top right
+
+The screenshot below lists the values to put
+
+Note: You need to replace m4144 with your project number below.
+![Create Deployment](./images/rancher-create-deployment.png)
+The following is specified in the UI
+
+**Containers**
+* Container Name - Set to *submithost*
+* Container Image - Set to *registry.nersc.gov/m4144/pegasus-annex*
+* Pull Policy - Set to *always*
+* Pull Secrets - Set to *registry-nersc*
+
+**Ports**
+* Service Type - Set to *do not create*
+* Name - Set to *condor*
+* Private Container Port - Set to *3306*
+* Protocol - Set to *TCP*
+
+**Command**
+Leave the default values. No need to change anything
+
+**Environment Variables**
+We add 2 environment variables
+* COLLECTOR_PORT - Set to *3306*
+* HOST_IP - Set to *pegasus-annex-loadbalancer.pegasus-workflows.development.svc.spin.nersc.org*
+
+#### Security Context
+Now you need to add the security context to your submithost container
+
+You add the following capabilities to your container
+* CHOWN
+* DAC_OVERRIDE
+* FOWNER
+* SETGID
+* SETUID
+
+Under Drop Capabilities, select
+* ALL
+
+The screenshot below illustrates that
+![Security-Context](./images/rancher-security-context.png)
+
