@@ -59,7 +59,8 @@ The Spin user guide has useful screenshots to help navigate the Rancher UI
 
 In the top left menu, click on Cluster and under it click on Projects/Namespaces. 
 Then click on the button, Create Namespace on the right.
-In the form that comes up, give pegasus-workflows as the name to the namespace.
+In the form that comes up, give the  <nersc-username>-pegasus-workflows as the name to the namespace.
+Replace the <nersc-username> with your nersc username.
 
 ![Create Pegasus Workflows namespace](./images/rancher-create-namespace.png)
 
@@ -69,11 +70,16 @@ Once the namespace is created, you will see pegasus-workflows in your created na
 Then in the top left menu, click on Workload and under it click on Deployments.
 Then click on the blue button, Create on the top right
 
+
 The screenshot below lists the values to put
 
 Note: You need to replace m4144 with your project number below.
+
 ![Create Deployment](./images/rancher-create-deployment.png)
 The following is specified in the UI
+
+**Name**
+Set it to pegasus-annex . The workspace selected should be the one you just created e.g. <nersc-username>-pegasus-workflows
 
 **Containers**
 * Container Name - Set to *submithost*
@@ -93,10 +99,16 @@ Leave the default values. No need to change anything
 **Environment Variables**
 We add 2 environment variables
 * COLLECTOR_PORT - Set to *3306*
-* HOST_IP - Set to *pegasus-annex-loadbalancer.pegasus-workflows.development.svc.spin.nersc.org*
+* HOST_IP - Set to *pegasus-annex-loadbalancer.<nersc-username>-pegasus-workflows.development.svc.spin.nersc.org*
+
+**NOTE**: Replace the <nersc-username> with your nersc username.
+
+**Service Account Name**
+Set Service Account Name to default
 
 #### Security Context
 Now you need to add the security context to your submithost container
+To do that Click on Security Context Under General in the submithost container menu
 
 You add the following capabilities to your container
 * CHOWN
@@ -109,5 +121,6 @@ Under Drop Capabilities, select
 * ALL
 
 The screenshot below illustrates that
-![Security-Context](./images/rancher-security-context.png)
+![Security-Context](./images/rancher-create-deployment-security-context.png)
 
+Now click the Blue Create button to create your deployment.
