@@ -32,7 +32,7 @@ Replace m4144 with your nersc project in commands below
 
 ```
 $ cd ..
-$ docker build --tag registry.nersc.gov/m4144/pegasus-annex . .
+$ docker build --tag registry.nersc.gov/m4144/pegasus-annex . 
 [+] Building 149.5s (14/14) FINISHED                                                                                                                ....                                     
  => naming to naming to registry.nersc.gov/m4144/pegasus-annex 
 ```
