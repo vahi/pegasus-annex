@@ -23,9 +23,9 @@ Provide your nesrc username and password. Note: OTP is not required for the NERS
 docker login registry.nersc.gov
 ```
 
-To build the docker container. You need to follow the following naming convention for building the image
+To build the docker containe, you need to follow the following naming convention for building the image
 
-registry.nersc.gov/<myproject>/<myimage>:<mytag>
+registry.nersc.gov/\<myproject\>/\<myimage\>:\<mytag\>
 
 where myproject is your NERSC project number e.g. m4144.
 Replace m4144 with your nersc project in commands below
