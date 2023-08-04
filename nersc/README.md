@@ -47,6 +47,4 @@ The push refers to repository [registry.nersc.gov/m4144/pegasus-annex]
 
 Now if you goto your web browser and login to https://registry.nersc.gov/ you will be able to see the container in the repositories tab under your project name
 
-## Example Workflow
-
-The container is setup with a `pegasus` user, that has an examples folder in it's home directory.
+![NERSC Repositories Listing by Project](./images/nersc-harbor-repos.png)
