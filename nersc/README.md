@@ -12,7 +12,7 @@ The Rancher system is available at https://rancher2.spin.nersc.gov/ .
 
 The NERSC container image registry, used in conjunction with Rancher, is available at https://registry.nersc.gov/ .
 
-## Build and Publish Docker Container to NERSC Registry
+## Step 1. Build and Publish Docker Container to NERSC Registry
 
 Login to  https://registry.nersc.gov/  with your NERSC credentials, and make sure you see your NERSC project in there.
 If you don't see it, contact NERSC user support at nersc@servicenowservices.com
@@ -48,7 +48,7 @@ Now if you goto your web browser and login to https://registry.nersc.gov/ you wi
 
 ![NERSC Repositories Listing by Project](./images/nersc-harbor-repos.png)
 
-## Deploy the container into Rancher
+## Step 2. Deploy the container into Rancher
 
 In your webbrowser go to https://rancher2.spin.nersc.gov/dashboard/auth/login and login with your NERSC username and password.
 
