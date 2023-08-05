@@ -124,3 +124,21 @@ The screenshot below illustrates that
 ![Security-Context](./images/rancher-create-deployment-security-context.png)
 
 Now click the Blue Create button to create your deployment.
+
+### Create the LoadBalancer Controller
+
+Now we need to create the loadbalancer controller. This allows the worker nodes on Perlmutter to connect back to our submit host container on port 3306 where we are running the HTCondor Collector.
+
+1) Under Workload, click Deployments and click your  workload; under the ⋮ menu, click Edit Config; in the header, click
+submithost; in the left panel, click General. Scroll down to Ports.
+
+2) Modify the existing port
+
+* Service Type - Set to *Load Balancer*
+* Name - Set to *condor*
+* Private Container Port - Set to *3306*
+* Protocol - Set to *TCP*
+* Listening Port - Set to *3306*
+
+3) Click Save
+
