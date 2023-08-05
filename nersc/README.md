@@ -59,7 +59,7 @@ The Spin user guide has useful screenshots to help navigate the Rancher UI
 
 In the top left menu, click on Cluster and under it click on Projects/Namespaces. 
 Then click on the button, Create Namespace on the right.
-In the form that comes up, give the  <nersc-username>-pegasus-workflows as the name to the namespace.
+In the form that comes up, give the  \<nersc-username\>-pegasus-workflows as the name to the namespace.
 Replace the <nersc-username> with your nersc username.
 
 ![Create Pegasus Workflows namespace](./images/rancher-create-namespace.png)
