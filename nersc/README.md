@@ -108,7 +108,7 @@ Leave the default values. No need to change anything
 We add 2 environment variables
 
 * COLLECTOR_PORT - Set to *3306*
-* HOST_IP - Set to *pegasus-annex-loadbalancer.<nersc-username>-pegasus-workflows.development.svc.spin.nersc.org*
+* HOST_IP - Set to *pegasus-annex-loadbalancer.\<nersc-username\>-pegasus-workflows.development.svc.spin.nersc.org*
 
 **NOTE**: Replace the <nersc-username> with your nersc username.
 
@@ -136,3 +136,74 @@ The screenshot below illustrates that
 
 Now click the Blue Create button to create your deployment.
 
+## Step 3. Login to your POD and check setup
+
+### Check HTCondor version and see if daemons are up
+Once your pod is up and running, it is worthwhile to login to your running pod. The easiest way to do that in the web-browser is to execute a shell in your pod as shown in the screenshot below.
+
+![Execute shell into your pod](./images/rancher-pod-shell.png)
+
+In the shell we run the following commands to check the status of your condor install
+
+Check HTCondor Version
+
+```
+[root@pegasus-annex-58c9d46864-kd7z5 /]# su pegasus
+[pegasus@pegasus-annex-58c9d46864-kd7z5 /]$ 
+[pegasus@pegasus-annex-58c9d46864-kd7z5 /]$ condor_version
+$CondorVersion: 10.3.1 2023-03-06 BuildID: 632991 PackageID: 10.3.1-1 $
+$CondorPlatform: x86_64_AlmaLinux8 $
+```
+
+Check HTCondor Collector is running
+```
+[pegasus@pegasus-annex-58c9d46864-kd7z5 /]$ condor_status -collector -l | grep MyAddress
+MyAddress = "<128.55.212.177:3306?addrs=128.55.212.177-3306&alias=pegasus-annex-58c9d46864-kd7z5&noUDP&sock=collector>"
+```
+
+Check if the collector is bound to the right IP. It is the IP that we set as an environment variable in the POD setup of the format ***pegasus-annex-loadbalancer.\<nersc-username\>-pegasus-workflows.development.svc.spin.nersc.org***
+
+```
+[pegasus@pegasus-annex-58c9d46864-kd7z5 /]$ condor_config_val TCP_FORWARDING_HOST
+pegasus-annex-loadbalancer.vahi-pegasus-workflows.development.svc.spin.nersc.org
+[pegasus@pegasus-annex-58c9d46864-kd7z5 /]$ telnet pegasus-annex-loadbalancer.vahi-pegasus-workflows.development.svc.spin.nersc.org 3306
+Trying 128.55.212.177...
+Connected to pegasus-annex-loadbalancer.vahi-pegasus-workflows.development.svc.spin.nersc.org.
+Escape character is '^]'.
+^CConnection closed by foreign host.
+```
+### Check connection from Perlmutter back to your POD on the load balancer IP
+
+In this test, we logon to the perlmutter head node, and run the same telnet command as in previous step
+
+```
+corbusier:~ vahi$ ssh perlmutter.nersc.gov
+...
+################################################################################
+                 _                 _   _
+                | |               | | | |
+ _ __   ___ _ __| |_ __ ___  _   _| |_| |_ ___ _ __
+| '_ \ / _ \ '__| | '_ ` _ \| | | | __| __/ _ \ '__|
+| |_) |  __/ |  | | | | | | | |_| | |_| ||  __/ |
+| .__/ \___|_|  |_|_| |_| |_|\__,_|\__|\__\___|_|
+| |
+|_|
+ 
+Welcome to perlmutter!
+################################################################################
+ 
+For all planned outages, see: https://www.nersc.gov/live-status/motd/
+ 
+For past outages, see: https://my.nersc.gov/outagelog-cs.php/
+vahi@perlmutter:login37:~> telnet pegasus-annex-loadbalancer.vahi-pegasus-workflows.development.svc.spin.nersc.org 3306
+Trying 128.55.212.177...
+Connected to pegasus-annex-loadbalancer.vahi-pegasus-workflows.development.svc.spin.nersc.org.
+Escape character is '^]'.
+^CConnection closed by foreign host.
+vahi@perlmutter:login37:~> 
+
+```
+
+## Step 4. Run Sample Workflows
+
+You can now switch to the main [README](../../README.md) to submit sample workflows.
