@@ -206,4 +206,4 @@ vahi@perlmutter:login37:~>
 
 ## Step 4. Run Sample Workflows
 
-You can now switch to the main [README](../../README.md) to submit sample workflows.
+You can now switch to the main [README](../README.md) to submit sample workflows.
